@@ -2,18 +2,18 @@
 # Build Path: /app/.heroku/otp/
 
 OUT_PREFIX=$1
+TAG="OTP-17.3"
 
-echo "Building Erlang..."
-SOURCE_TARBALL='https://github.com/erlang/otp/archive/OTP-17.3.tar.gz'
-mkdir src
-curl -L $SOURCE_TARBALL | tar xz -C src
+echo "Building Erlang/${TAG} to ${OUT_PREFIX}..."
+SOURCE_TARBALL='https://github.com/erlang/otp/archive/${TAG}.tar.gz'
+curl -L $SOURCE_TARBALL | tar xz
 
-cd src
+cd otp-${TAG}
 for i in jinterface megaco; do
   touch lib/${i}/SKIP
   echo "Disabling ${i}"
 done
-./otp_build all -a ${REL_DIR}
+./otp_build all -a ${OUT_PREFIX}
 
 cd ..
-rm -fr src
+rm -fr otp-${TAG}
