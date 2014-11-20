@@ -5,8 +5,7 @@ OUT_PREFIX=$1
 TAG="OTP-17.3"
 
 echo "Building Erlang/${TAG} to ${OUT_PREFIX}..."
-SOURCE_TARBALL='https://github.com/erlang/otp/archive/${TAG}.tar.gz'
-curl -L $SOURCE_TARBALL | tar xz
+curl -L https://github.com/erlang/otp/archive/${TAG}.tar.gz | tar xz
 
 cd otp-${TAG}
 for i in jinterface megaco; do
