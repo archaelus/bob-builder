@@ -139,7 +139,7 @@ class Formula(object):
         self.archived_path = archive
 
 
-    def deploy(self, allow_overwrite=False):
+    def deploy(self, allow_overwrite=False, set_acl=False):
         """Deploys the formula's archive to S3."""
         assert self.archived_path
 
@@ -156,4 +156,5 @@ class Formula(object):
 
         # Upload the archive, set permissions.
         key.set_contents_from_filename(self.archived_path)
-        key.set_acl('public-read')
+        if set_acl:
+            key.set_acl('public-read')

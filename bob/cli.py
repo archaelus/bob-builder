@@ -39,14 +39,14 @@ def build(formula):
     # Then, sidestep.
 
 
-def deploy(formula, overwrite):
+def deploy(formula, overwrite, do_set_acl):
     f = build(formula)
 
     print 'Archiving.'
     f.archive()
 
     print 'Deploying.'
-    f.deploy(allow_overwrite=overwrite)
+    f.deploy(allow_overwrite=overwrite, set_acl=do_set_acl)
 
 
 
@@ -58,13 +58,13 @@ def main():
     do_build = args['build']
     do_deploy = args['deploy']
     do_overwrite = args['--overwrite']
-
+    do_set_acl = args['--set_acl']
 
     if do_build:
         build(formula)
 
     if do_deploy:
-        deploy(formula, overwrite=do_overwrite)
+        deploy(formula, overwrite=do_overwrite, set_acl=do_set_acl)
 
 
 def dispatch():
