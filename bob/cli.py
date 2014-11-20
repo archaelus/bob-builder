@@ -40,14 +40,14 @@ def build(formula):
     # Then, sidestep.
 
 
-def deploy(formula, overwrite, do_set_acl):
+def deploy(formula, overwrite, set_acl):
     f = build(formula)
 
     print 'Archiving.'
     f.archive()
 
     print 'Deploying.'
-    f.deploy(allow_overwrite=overwrite, set_acl=do_set_acl)
+    f.deploy(allow_overwrite=overwrite, set_acl=set_acl)
 
 
 
