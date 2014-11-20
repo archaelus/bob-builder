@@ -76,6 +76,13 @@ class Formula(object):
         # If none was provided, fallback to default.
         return DEFAULT_BUILD_PATH
 
+    @property
+    def stack_suffix(self):
+        """A string with a per-heroku stack suffix"""
+        if os.environ["STACK"] == "cedar-14":
+            return "cedar-14"
+        else:
+            return ""
 
     def resolve_deps(self):
 
@@ -143,7 +150,7 @@ class Formula(object):
         """Deploys the formula's archive to S3."""
         assert self.archived_path
 
-        key_name = '{}{}.tar.gz'.format(S3_PREFIX, self.path)
+        key_name = '{}{}{}.tgz'.format(S3_PREFIX, self.path, self.stack_suffix)
         key = bucket.get_key(key_name)
 
         if key:
