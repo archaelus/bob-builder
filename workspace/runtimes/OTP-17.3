@@ -2,7 +2,7 @@
 # Build Path: /app/.heroku/otp/
 
 OUT_PREFIX=$1
-TAG="OTP-17.3"
+TAG=$(basename $0)
 
 echo "Building Erlang/${TAG} to ${OUT_PREFIX}..."
 curl -L https://github.com/erlang/otp/archive/${TAG}.tar.gz | tar xz
