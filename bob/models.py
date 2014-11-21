@@ -80,7 +80,7 @@ class Formula(object):
     def stack_suffix(self):
         """A string with a per-heroku stack suffix"""
         if os.environ["STACK"] == "cedar-14":
-            return "cedar-14"
+            return "_cedar-14"
         else:
             return ""
 
