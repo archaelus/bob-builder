@@ -84,6 +84,11 @@ class Formula(object):
         else:
             return ""
 
+    @property
+    def s3_name(self):
+        """S3 bucket key for the archive for this formula"""
+        return '{}{}{}.tgz'.format(S3_PREFIX, self.path, self.stack_suffix)
+
     def resolve_deps(self):
 
         # Dependency metadata, extracted from bash comments.
@@ -150,7 +155,7 @@ class Formula(object):
         """Deploys the formula's archive to S3."""
         assert self.archived_path
 
-        key_name = '{}{}{}.tgz'.format(S3_PREFIX, self.path, self.stack_suffix)
+        key_name = self.s3_name
         key = bucket.get_key(key_name)
 
         if key:
